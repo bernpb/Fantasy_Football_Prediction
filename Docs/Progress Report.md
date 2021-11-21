@@ -36,3 +36,12 @@
  ### Sunday, November 21st, 2021
  
  * Write a function to assign game points to the correct team.  (Home/Away)
+ * Created features describing a player's individual contribution to a team's offense.
+ * Expanded EDA
+ * Prep for performing a baseline model tomorrow
+ 
+ # Day 4
+ ### Monday, November 22nd, 2021
+ 
+ * Build baseline linear regression model
+ * Build a method for active ranking of team defenses throughout the dataset
