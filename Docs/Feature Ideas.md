@@ -18,11 +18,9 @@
 * Weather at game time
 * Home vs Away
 * Delta in standings --- ie: Win Count
-* Defensive rank at game time
-* Offensive rank at game time
-* Team rushing rank
-* Team passing rank
-
+* Opponent defensive team rank at game time
+* Offensive team rank at game time
+* Just back from injury
 
 
 # Engineered Features

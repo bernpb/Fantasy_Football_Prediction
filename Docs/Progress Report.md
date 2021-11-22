@@ -43,5 +43,18 @@
  # Day 4
  ### Monday, November 22nd, 2021
  
+ * Implement a pipeline for all feature engineering and preprocessing
+ * Investigate large class imbalance between players with a score of 0 and players that scored
  * Build baseline linear regression model
+     * Try a polynomial regression
+     * Try implementing select K best and PCA
+ * Build out a Random Forest Model
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ # To Do:
  * Build a method for active ranking of team defenses throughout the dataset
