@@ -46,7 +46,7 @@
  * Implement a pipeline for all feature engineering and preprocessing
  * Investigate large imbalance between players with a score of 0 and players that scored (Turns out to be about 50% of players with a zero score)
  * Built baseline linear regression model
-     * Try implementing select K best and PCA
+     * Implemented PCA, did not improve the model quality
  * Built a polynomial regression model
  * Built out a Random Forest Model
  

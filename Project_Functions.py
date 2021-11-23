@@ -71,7 +71,8 @@ def trailing_stats_mean(df):
         # Append the temporary dataframe to the output
         df_out = df_out.append(temp_df)
     # Return a dataframe with the values sorted by the original index
-    return df_out.sort_index()
+    df_out.sort_index(inplace = True)
+    return df_out
     
 #---------------------------------------------------------
 
