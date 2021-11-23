@@ -44,11 +44,11 @@
  ### Monday, November 22nd, 2021
  
  * Implement a pipeline for all feature engineering and preprocessing
- * Investigate large class imbalance between players with a score of 0 and players that scored
- * Build baseline linear regression model
-     * Try a polynomial regression
+ * Investigate large imbalance between players with a score of 0 and players that scored (Turns out to be about 50% of players with a zero score)
+ * Built baseline linear regression model
      * Try implementing select K best and PCA
- * Build out a Random Forest Model
+ * Built a polynomial regression model
+ * Built out a Random Forest Model
  
  
  
@@ -58,3 +58,4 @@
  
  # To Do:
  * Build a method for active ranking of team defenses throughout the dataset
+ * Try a log transform
