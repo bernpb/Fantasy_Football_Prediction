@@ -70,9 +70,11 @@
  * Back to the EDA
  
  
-   # Day 6
- ### Wednesday, November 24th, 2021
+   # Day 7
+ ### Thursday, November 25th, 2021
  
+ * Work on API and Streamlit web app
+ * Try an SVR model out for kicks
  
  # To Do:
 * Build a method for active ranking of team defenses throughout the dataset

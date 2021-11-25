@@ -6,8 +6,9 @@
 * Delta in standings --- ie: Win Count
 * Opponent defensive team rank at game time
 * Offensive team rank at game time
-* Just back from injury
+* Make a more accurate method for tracking injuries
 * Career Average Fantasy Points
+* Last game stats
 
 # Engineered Features
 

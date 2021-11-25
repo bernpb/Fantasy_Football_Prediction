@@ -48,8 +48,9 @@ stats_for_trailing = ['TotalTouchdowns','RushingYards','PassingInterceptions','P
 def trailing_stats_mean(df):
     
     """
-    Function to create a new column with a trailing aggregate mean
-    as a new feature for prediction.
+    Function to create a dataframe with a trailing aggregate mean
+    as a new feature for prediction.  Does so for each column in the global
+    variable stats_for_trailing
     
     Inputs:
         - df: The dataframe on which the function will be applied
@@ -77,8 +78,48 @@ def trailing_stats_mean(df):
         # so that the current value for fantasy points is not included in the calculation.
         # Backfill the two resulting NaN values
         for column in stats_for_trailing:
-            temp_df[f'TA{column}'] = temp_df[column].rolling(window = 7, 
+            temp_df[f'TA{column}'] = temp_df[column].fillna(method = 'ffill').rolling(window = 7, 
                                                               closed = 'left').mean().fillna(method = 'bfill')
+        # Append the temporary dataframe to the output
+        df_out = df_out.append(temp_df)
+    # Return a dataframe with the values sorted by the original index
+    df_out.sort_index(inplace = True)
+    return df_out
+    
+#---------------------------------------------------------
+
+def trailing_stats_single_column(df, column):
+    
+    """
+    Function to create a new column with a trailing aggregate mean
+    as a new feature for prediction.
+    
+    Inputs:
+        - df: The dataframe on which the function will be applied
+        - Column: The column on which to apply the function
+        - Window: The number of past values to consider when apply the function
+
+        
+    Output:
+        - An aggregate value
+        
+    """
+    
+    # Get all unique players in the DataFrame
+    players = df['Name'].unique().tolist()
+    
+    # Make a dataframe to store the output
+    df_out = pd.DataFrame()
+    # Loop through the unique players
+    for player in players:
+        # Create a temporary dataframe for each player
+        temp_df = df[df['Name'] == player]
+        # Calculate the n game trailing average for all players.  Set closed parameter to 'left'
+        # so that the current value for fantasy points is not included in the calculation.
+        # Backfill the two resulting NaN values
+       
+        temp_df[f'TA{column}'] = temp_df[column].fillna(method='ffill').rolling(window = 7, 
+                                                            closed = 'left').mean().fillna(method = 'bfill')
         # Append the temporary dataframe to the output
         df_out = df_out.append(temp_df)
     # Return a dataframe with the values sorted by the original index
@@ -232,3 +273,16 @@ def LogShift(X):
     X_log = np.log(X_10)
     
     return X_log
+
+#---------------------------------------------------------------------
+from sklearn.base import TransformerMixin
+# Build a new transformer class to convert the sparse matrix output of the 
+# pipeline to a dense matrix compatible with the model
+
+class DenseTransformer(TransformerMixin):
+
+    def fit(self, X, y = None, **fit_params):
+        return self
+
+    def transform(self, X, y = None, **fit_params):
+        return X.todense()
