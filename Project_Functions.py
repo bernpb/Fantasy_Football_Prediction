@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def offensive_contribution(df):
+def offensive_contribution(home_away, total_yards, home_yards, away_yards):
     
     """
     Calculate a percentage for the percentage of team yards that a player contributes to.
@@ -13,25 +13,36 @@ def offensive_contribution(df):
         - New dataframe column with the desired contribution score
     """
     
-    if df['HomeOrAway'] == 'HOME':
-        contribution =  df['TotalYards'] / df['HomeYards']
+    if home_away == 'HOME':
+        contribution =  total_yards / home_yards
         if contribution > 1:
-            return 1.0
+             return 1.0
         else:
             return contribution
-    elif df['HomeOrAway'] == 'AWAY':
-        contribution =  df['TotalYards'] / df['AwayYards'] 
+            
+    elif home_away == 'AWAY':
+        contribution =  total_yards / away_yards
         if contribution > 1:
-            return 1.0
+              return 1.0
         else:
             return contribution
         
+        
+def get_contribution(df):
+    
+    df['YardageContribution'] = df.apply(lambda x: offensive_contribution(x['HomeOrAway'],
+                                                                         x['TotalYards'],
+                                                                         x['HomeYards'],
+                                                                         x['AwayYards']),
+                                        axis = 1)
+    return df
+
 #---------------------------------------------------------
 # Define the stats for which we need to calculate trailing averages
 stats_for_trailing = ['TotalTouchdowns','RushingYards','PassingInterceptions','PassingTouchdowns','PassingRating','PassingYards',
-                      'PassingCompletionPercentage','RushingYards', 'RushingTouchdowns', 'RushingLong',
-                      'Receptions','ReceivingYards','ReceivingTargets', 'ReceivingTouchdowns', 'ExtraPointsMade', 'FieldGoalsMade',
-                      'Fumbles','FumblesLost']
+                      'PassingCompletionPercentage', 'PassingLong','RushingYards', 'RushingTouchdowns', 'RushingLong',
+                      'RushingYardsPerAttempt', 'ReceivingYardsPerReception', 'PuntReturns', 'PuntReturnTouchdowns',
+                      'Receptions','ReceivingYards','ReceivingTargets', 'ReceivingTouchdowns', 'ExtraPointsMade', 'FieldGoalsMade','FieldGoalsMade40to49','FieldGoalsMade50Plus','Fumbles','FumblesLost']
 
 
 def trailing_stats_mean(df):
@@ -66,7 +77,7 @@ def trailing_stats_mean(df):
         # so that the current value for fantasy points is not included in the calculation.
         # Backfill the two resulting NaN values
         for column in stats_for_trailing:
-            temp_df[f'TA{column}'] = temp_df[column].rolling(window = 5, 
+            temp_df[f'TA{column}'] = temp_df[column].rolling(window = 7, 
                                                               closed = 'left').mean().fillna(method = 'bfill')
         # Append the temporary dataframe to the output
         df_out = df_out.append(temp_df)
@@ -197,3 +208,27 @@ def get_touchdowns(df):
     df['TotalTouchdowns'] = TD_sum
     
     return df
+
+def get_yards(df):
+    
+    """
+    Get the total number of yards for a player in a given week.
+    
+    Input:
+        - Dataframe
+    Output:
+        - Dataframe with a new column representing total touchdowns"""
+    
+    yardage_sum = df['ReceivingYards'] + df['RushingYards'] + df['PassingYards']
+    df['TotalYards'] = yardage_sum
+    
+    return df
+
+#---------------------------------------------------------------------
+
+def LogShift(X):
+    
+    X_10 = X + 10
+    X_log = np.log(X_10)
+    
+    return X_log

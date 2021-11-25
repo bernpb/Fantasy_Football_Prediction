@@ -1,5 +1,18 @@
-* Think about bye weeks.  How do I account for that in predictions?
-* For previous 3 games; as sum, rolling average or percentage.
+
+# Features to add
+
+* Weather at game time
+* Home vs Away
+* Delta in standings --- ie: Win Count
+* Opponent defensive team rank at game time
+* Offensive team rank at game time
+* Just back from injury
+* Career Average Fantasy Points
+
+# Engineered Features
+
+* TrailingAverageFantasyPointsPPR
+* For previous 5 games; as sum, rolling average or percentage.
     * Passing completion %
     * Passing yards (mean)
     * Reception %
@@ -12,19 +25,6 @@
     * Touchdowns
     * Sacks
     * Punt return yards
-* Bin players into 4 categories for their positions
+* Bin players into 4 categories/tiers for their positions
     * Could base it on previous season performance, or make it a lagging indicator like with continuous stats
         * Use the rolling fantasy points average to bin players based on position
-* Weather at game time
-* Home vs Away
-* Delta in standings --- ie: Win Count
-* Opponent defensive team rank at game time
-* Offensive team rank at game time
-* Just back from injury
-
-
-# Engineered Features
-
-* TrailingAverageFantasyPointsPPR
-* PlayerTier
-* 

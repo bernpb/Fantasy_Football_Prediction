@@ -50,12 +50,31 @@
  * Built a polynomial regression model
  * Built out a Random Forest Model
  
+  # Day 5
+ ### Tuesday, November 23rd, 2021
+ 
+ * Squashed bugs.  So many bugs
+ * Applied log transform
+ * Built out a NN (Google Collab)
+ * XGBoost model (Google Collab)
+ * Engineer more lagged features
+ 
+  # Day 6
+ ### Wednesday, November 24th, 2021
+ 
+ * Squashed bugs.  So many bugs
+ * Applied log transform
+ * Parameter tuning which led to a rebuild of neural network
+ * Parameter tuning and application of pipeline on XGBoost model
+ * Research into streamlit and a few tutorials
+ * Back to the EDA
  
  
- 
- 
+   # Day 6
+ ### Wednesday, November 24th, 2021
  
  
  # To Do:
- * Build a method for active ranking of team defenses throughout the dataset
- * Try a log transform
+* Build a method for active ranking of team defenses throughout the dataset
+* Build API with flask
+* Build web app with streamlit
