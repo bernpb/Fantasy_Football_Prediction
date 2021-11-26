@@ -78,8 +78,10 @@ def trailing_stats_mean(df):
         # so that the current value for fantasy points is not included in the calculation.
         # Backfill the two resulting NaN values
         for column in stats_for_trailing:
-            temp_df[f'TA{column}'] = temp_df[column].fillna(method = 'ffill').rolling(window = 7, 
+            temp_df[f'TA7{column}'] = temp_df[column].fillna(method = 'ffill').rolling(window = 7, 
                                                               closed = 'left').mean().fillna(method = 'bfill')
+            temp_df[f'TA3{column}'] = temp_df[column].rolling(window = 3, 
+                                                              closed = 'left').mean().fillna(method = 'bfill') 
         # Append the temporary dataframe to the output
         df_out = df_out.append(temp_df)
     # Return a dataframe with the values sorted by the original index
@@ -118,8 +120,10 @@ def trailing_stats_single_column(df, column):
         # so that the current value for fantasy points is not included in the calculation.
         # Backfill the two resulting NaN values
        
-        temp_df[f'TA{column}'] = temp_df[column].fillna(method='ffill').rolling(window = 7, 
+        temp_df[f'TA7{column}'] = temp_df[column].fillna(method='ffill').rolling(window = 7, 
                                                             closed = 'left').mean().fillna(method = 'bfill')
+        temp_df[f'TA3{column}'] = temp_df[column].rolling(window = 3, 
+                                                              closed = 'left').mean().fillna(method = 'bfill')                                                     
         # Append the temporary dataframe to the output
         df_out = df_out.append(temp_df)
     # Return a dataframe with the values sorted by the original index
@@ -230,7 +234,7 @@ def get_tiers(df):
     Apply the tier_maker function to the entire dataframe.
     """
     
-    df['PlayerTier'] = df.apply(lambda x: tier_maker(x['Position'], x['TAFantasyPointsPPR']),
+    df['PlayerTier'] = df.apply(lambda x: tier_maker(x['Position'], x['TA7FantasyPointsPPR']),
                                axis = 1)
     return df
 #---------------------------------------------------------------------

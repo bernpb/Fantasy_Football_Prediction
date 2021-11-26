@@ -12,7 +12,8 @@
 
 # Engineered Features
 
-* TrailingAverageFantasyPointsPPR
+* TrailingAverageFantasyPointsPPR 3-game
+* TrailingAverageFantasyPointsPPR 7-game
 * For previous 5 games; as sum, rolling average or percentage.
     * Passing completion %
     * Passing yards (mean)

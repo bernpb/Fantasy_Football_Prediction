@@ -62,7 +62,7 @@
   # Day 6
  ### Wednesday, November 24th, 2021
  
- * Squashed bugs.  So many bugs
+ * Squashed bugs.  Fewer than yesterday
  * Applied log transform
  * Parameter tuning which led to a rebuild of neural network
  * Parameter tuning and application of pipeline on XGBoost model
@@ -73,10 +73,25 @@
    # Day 7
  ### Thursday, November 25th, 2021
  
- * Work on API and Streamlit web app
- * Try an SVR model out for kicks
+ * Streamlit tutorials and reading documentation
+ * Model tuning
+ * Work on Streamlit web app
+ * Set up Amazon EC2 instance for deployment
+ * Generate dataset for prediction
+ 
+ 
+ # Day 8
+ ### Friday, November 26th, 2021
+ 
+ * Completed SVR Modelling (Best one yet)
+ * Worked on streamlit web app
+ * Dove into EDA of defensive and offensive team performance as feature engineering
+ * Developped functions for engineering defensive and offensive features
+ * Created two sets of trailing average data, increased model performance across the board.
+
  
  # To Do:
-* Build a method for active ranking of team defenses throughout the dataset
-* Build API with flask
-* Build web app with streamlit
+* Deploy model to amazon EC2 instance
+* Work on Presentation
+* Apply the trailing average methodology for the defensive statistics accumulated in the Defensive EDA
+*
