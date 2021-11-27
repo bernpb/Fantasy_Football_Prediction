@@ -12,8 +12,8 @@ from Project_Functions import get_tiers, get_touchdowns, get_yards, tier_maker, 
 # Define some variables
 week = 12
 season = 2021
-im = Image.open('Docs/.ipynb_checkpoints/ameer-basheer-Yzef5dRpwWg-unsplash.jpg')
-im2 = Image.open('Docs/.ipynb_checkpoints/ben-hershey-B4XZxcZcTsI-unsplash.jpg')
+im = Image.open('Docs/ameer-basheer-Yzef5dRpwWg-unsplash.jpg')
+im2 = Image.open('Docs/ben-hershey-B4XZxcZcTsI-unsplash.jpg')
 
 # Set the default width of the app
 # st.set_page_config(layout='wide')
