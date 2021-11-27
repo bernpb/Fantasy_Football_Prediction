@@ -88,10 +88,7 @@ def generate_data(df_players, df_schedule, week, season):
     # Create a dictionary of matchups for the week
     matchup_dict = {}
     for i, row in enumerate(range(len(df_schedule_week_season))):
-        matchup_dict[df_schedule_week_season.iloc[i]['HomeTeam']] = df_schedule_week_season.iloc[i]['AwayTeam']
-        matchup_dict[df_schedule_week_season.iloc[i]['AwayTeam']] = df_schedule_week_season.iloc[i]['HomeTeam']
-    
-    
+        matchup_dict[df_schedule_week_season.iloc[i]['Team']] = df_schedule_week_season.iloc[i]['Opponent']
 
     # Make a list of the columns in df_players to create a new dataframe with the same info
     columns = df_players.columns.tolist()
@@ -132,6 +129,7 @@ df_schedule = pd.read_csv('Data/game_scores.csv')
 
 # Generate data
 data = generate_data(df_players, df_schedule, week, season)
+st.write(data)
 
 players_list = data['Name'].unique().tolist()
 
@@ -188,25 +186,23 @@ else:
         a valid prediction.  Try somebody else.")
 
 # Generate predictions for the dataset
-@st.cache
+@st.cache(allow_output_mutation=True)
 def get_predictions(model, data):
     preds = model.predict(data)
     return np.exp(preds) - 10
 
 
 # Calculate the predictions for all week 12 players
-with st.spinner('Crunching numbers, delivering you to glory......'):
-    data['Prediction'] = get_predictions(model, data)
+data['Prediction'] = get_predictions(model, data)
 
-    # If the player is playing, get their predicted output
-    try:
-        predicted_output = round(float(data[(data['Week'] == week) & (data['Name'] == player)][['Prediction']].values[0][0]),2)
-    # If bye week, say so
-    except:
-        predicted_output = 'Bye Week'
+# If the player is playing, get their predicted output
+try:
+    predicted_output = round(float(data[(data['Week'] == week) & (data['Name'] == player)][['Prediction']].values[0][0]),2)
+# If bye week, say so
+except:
+    predicted_output = 'Bye Week'
 
-    # Format the output for the player
-    col1, col2 = st.columns(2)
-    col1.metric('Player', player)
-    col2.metric('Predicted Points', predicted_output)
-st.success('Enjoy thrashing your buddies.')
+# Format the output for the player
+col1, col2 = st.columns(2)
+col1.metric('Player', player)
+col2.metric('Predicted Points', predicted_output)
