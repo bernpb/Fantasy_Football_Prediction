@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def offensive_contribution(home_away, total_yards, home_yards, away_yards):
+def offensive_contribution(team_yards, player_yards):
     
     """
     Calculate a percentage for the percentage of team yards that a player contributes to.
@@ -12,29 +12,24 @@ def offensive_contribution(home_away, total_yards, home_yards, away_yards):
     Output:
         - New dataframe column with the desired contribution score
     """
-    
-    if home_away == 'HOME':
-        contribution =  total_yards / home_yards
-        if contribution > 1:
-             return 1.0
-        else:
-            return contribution
-            
-    elif home_away == 'AWAY':
-        contribution =  total_yards / away_yards
-        if contribution > 1:
-              return 1.0
-        else:
-            return contribution
-        
-        
+    contribution = player_yards / team_yards
+    if contribution > 1.0:
+        return 1.0
+    else:
+        return contribution     
+
+  #--------------------------------------------------------------------      
+      
 def get_contribution(df):
     
-    df['YardageContribution'] = df.apply(lambda x: offensive_contribution(x['HomeOrAway'],
+    """
+    Apply offensive_contribution(), taking in the whole dataframe as input.
+    """
+    
+    df['YardageContribution'] = df.apply(lambda x: offensive_contribution(x['YardsFor'],
                                                                          x['TotalYards'],
-                                                                         x['HomeYards'],
-                                                                         x['AwayYards']),
-                                        axis = 1)
+                                                                         ), axis = 1)
+                                                      
     return df
 
 #---------------------------------------------------------
@@ -42,7 +37,8 @@ def get_contribution(df):
 stats_for_trailing = ['TotalTouchdowns','RushingYards','PassingInterceptions','PassingTouchdowns','PassingRating','PassingYards',
                       'PassingCompletionPercentage', 'PassingLong','RushingYards', 'RushingTouchdowns', 'RushingLong',
                       'RushingYardsPerAttempt', 'ReceivingYardsPerReception', 'PuntReturns', 'PuntReturnTouchdowns',
-                      'Receptions','ReceivingYards','ReceivingTargets', 'ReceivingTouchdowns', 'ExtraPointsMade', 'FieldGoalsMade','FieldGoalsMade40to49','FieldGoalsMade50Plus','Fumbles','FumblesLost']
+                      'Receptions','ReceivingYards','ReceivingTargets', 'ReceivingTouchdowns', 'ExtraPointsMade', 'FieldGoalsMade',
+                      'FieldGoalsMade40to49','FieldGoalsMade50Plus','Fumbles','FumblesLost', 'TeamPoints', 'OpponentPoints', 'YardsFor', 'YardsAgainst']
 
 
 def trailing_stats_mean(df):
