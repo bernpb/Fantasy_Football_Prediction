@@ -69,7 +69,7 @@ def trailing_stats_mean(df):
     # Loop through the unique players
     for player in players:
         # Create a temporary dataframe for each player
-        temp_df = df[df['Name'] == player]
+        temp_df = df[(df['Name'] == player) & (df['InjuryStatus'] != 'Out')]
         # Calculate the n game trailing average for all players.  Set closed parameter to 'left'
         # so that the current value for fantasy points is not included in the calculation.
         # Backfill the two resulting NaN values
@@ -111,8 +111,7 @@ def trailing_stats_single_column(df, column):
     # Loop through the unique players
     for player in players:
         # Create a temporary dataframe for each player
-        temp_df = df[df['Name'] == player]
-        # Calculate the n game trailing average for all players.  Set closed parameter to 'left'
+        temp_df = df[(df['Name'] == player) & (df['InjuryStatus'] != 'Out')]        # Calculate the n game trailing average for all players.  Set closed parameter to 'left'
         # so that the current value for fantasy points is not included in the calculation.
         # Backfill the two resulting NaN values
        

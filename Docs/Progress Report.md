@@ -32,16 +32,16 @@
     * Developped a method for mapping scores and team yardage to each observation in the set
     * Will use this to develop a feature representing how much a player contributes to their team's offense
     
- # Day 3
- ### Sunday, November 21st, 2021
+# Day 3
+### Sunday, November 21st, 2021
  
  * Write a function to assign game points to the correct team.  (Home/Away)
  * Created features describing a player's individual contribution to a team's offense.
  * Expanded EDA
  * Prep for performing a baseline model tomorrow
  
- # Day 4
- ### Monday, November 22nd, 2021
+# Day 4
+### Monday, November 22nd, 2021
  
  * Implement a pipeline for all feature engineering and preprocessing
  * Investigate large imbalance between players with a score of 0 and players that scored (Turns out to be about 50% of players with a zero score)
@@ -50,17 +50,18 @@
  * Built a polynomial regression model
  * Built out a Random Forest Model
  
-  # Day 5
- ### Tuesday, November 23rd, 2021
+# Day 5
+### Tuesday, November 23rd, 2021
  
+ * Acquire updated dataset for week 12 of season
  * Squashed bugs.  So many bugs
  * Applied log transform
  * Built out a NN (Google Collab)
  * XGBoost model (Google Collab)
  * Engineer more lagged features
  
-  # Day 6
- ### Wednesday, November 24th, 2021
+# Day 6
+### Wednesday, November 24th, 2021
  
  * Squashed bugs.  Fewer than yesterday
  * Applied log transform
@@ -70,7 +71,7 @@
  * Back to the EDA
  
  
-   # Day 7
+ # Day 7
  ### Thursday, November 25th, 2021
  
  * Streamlit tutorials and reading documentation
@@ -80,8 +81,8 @@
  * Generate dataset for prediction
  
  
- # Day 8
- ### Friday, November 26th, 2021
+# Day 8
+### Friday, November 26th, 2021
  
  * Completed SVR Modelling (Best one yet)
  * Worked on streamlit web app
@@ -90,8 +91,31 @@
  * Created two sets of trailing average data, increased model performance across the board.
 
  
- # To Do:
-* Deploy model to amazon EC2 instance
-* Work on Presentation
-* Apply the trailing average methodology for the defensive statistics accumulated in the Defensive EDA
-*
+# Day 9
+### Saturday, November 27th, 2021
+
+* Developped new features to track overall team metrics
+    * Overall offensive scoring
+    * Metrics for evaluating the strength of opposing defenses
+* Implemented weather as a feature
+    * Did not improve the model so it was scrapped
+    
+# Day 10
+### Sunday, November 28th, 2021
+
+* First deployment of model using an Amazon EC2 instance
+* Updated visualization candidates for presentation
+
+
+# Day 11
+### Monday, November 29th, 2021
+
+* Code review and refactoring
+* Updated project readme and created a table of contents for github
+* Updated streamlit app using st.cache to improve app performance
+* Added visualizations to app output
+* Work on presentation started
+* Updated visualization candidates for presentation
+
+
+

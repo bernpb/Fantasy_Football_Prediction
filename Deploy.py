@@ -1,12 +1,14 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+import copy
 import time
 from PIL import Image
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from Project_Functions import trailing_stats_single_column, trailing_stats_mean, get_contribution
 from Project_Functions import get_tiers, get_touchdowns, get_yards, tier_maker, LogShift, DenseTransformer
+from Make_Plots import make_plots
 
 
 # Define some variables
@@ -23,8 +25,9 @@ im2 = Image.open('Docs/ben-hershey-B4XZxcZcTsI-unsplash.jpg')
 st.sidebar.image(im)
 st.sidebar.write('')
 st.sidebar.write('This page is the result of my final project for the Lighthouse Labs data science \
-    bootcamp.  \n It is intended for demonstration purposes only.  Please do not share the link to this \
-        page without permision.  Please see my contact info below if you would like to get in touch.')
+    bootcamp.  \n It is intended for demonstration purposes only.')
+st.sidebar.write('Please do not share the link to this \
+        page without permision.')
 st.sidebar.markdown('**********')
 st.sidebar.subheader('Contact')
 st.sidebar.write('Bern Priest-Blais')
@@ -40,7 +43,9 @@ st.subheader(f"Week {week} ")
 st.subheader(f'{season}-{season + 1} season')
 st.image(im2)
 st.write('\n \n')
-description = 'This is a machine learning model designed to predict the offensive output of NFL players on a weekly basis. <br> <br>\
+description = f'This is a machine learning model designed to predict the offensive output of \
+    NFL players on a weekly basis.  All predictions provided are for the current week of the season, \
+        week {week}.<br> <br>\
     Valid positions for prediction are: <br> \
         - Quarterback (QB) <br>\
         - Running Back (RB) <br>\
@@ -50,7 +55,7 @@ description = 'This is a machine learning model designed to predict the offensiv
 st.markdown(description, unsafe_allow_html=True)
 st.markdown('***********')
 st.write("To start, enter the name of the player you are looking for projections \
-            for in the box  below.  (Case and spelling matter) ")
+            for in the box below.  (Case and spelling matter) ")
 
 # Prompt for player input            
 player = st.text_input('Player Name', 'Tom Brady')
@@ -119,7 +124,7 @@ def generate_data(df_players, df_schedule, week, season):
 
 # Import the model for prediction
 import pickle
-model = pickle.load(open('Pickles/SVR.pickle', 'rb'))
+model = pickle.load(open('Pickles/SVR_Final.pickle', 'rb'))
 
 
 
@@ -129,71 +134,21 @@ df_schedule = pd.read_csv('Data/game_scores.csv')
 
 # Generate data
 data = generate_data(df_players, df_schedule, week, season)
-st.write(data)
 
-players_list = data['Name'].unique().tolist()
-
-if player in players_list:
-    # Create a visualization
-    visual = data[data['Name'] == player]
-   
-    fig = make_subplots(rows=2, cols=2,)
-    # subplot_titles = ('Fantasy Points PPR', 'Rushing Yards', 'Passing Yards', 'Receiving Yards'))
-    # Display fantasy points
-    fig.add_trace(go.Bar(name = 'Fantasy Points PPR', 
-    x = visual['Week'],
-    y = visual['FantasyPointsPPR']),
-    row = 1,
-    col = 1)
-    # Display rushing yards
-    fig.add_trace(go.Bar(name = 'Rushing Yards',
-    x = visual['Week'],
-    y = visual['RushingYards']),
-    row = 1,
-    col = 2)
-    # Display receiving yards
-    fig.add_trace(go.Bar(name = 'Receiving Yards',
-    x = visual['Week'],
-    y = visual['ReceivingYards']),
-    row = 2,
-    col = 2)
-    # Display passing yards
-    fig.add_trace(go.Bar(name = 'Passing Yards',
-    x = visual['Week'],
-    y = visual['PassingYards']),
-    row = 2,
-    col = 1)
-    
-        # Update xaxis properties
-    fig.update_xaxes(title_text="Week", row=1, col=1)
-    fig.update_xaxes(title_text="Week", range=[0, 12], row=1, col=2)
-    fig.update_xaxes(title_text="Week", row=2, col=1)
-    fig.update_xaxes(title_text="Week", row=2, col=2)
-
-    fig.update_layout(template = 'plotly_dark',
-    title = {'text': f'{player} fantasy output by week for the {season}-{season + 1} season.',
-    'y': 0.9,
-    'x': 0.135,
-    'yanchor': 'top',
-    'xanchor': 'left'},
-    height = 600,
-    width = 1000)
-    st.plotly_chart(fig, use_container_width=True)
-
-
-else:
-    st.subheader(f"It doesn't look like '{player}' has played any games this season.  Won't be able to provide \
-        a valid prediction.  Try somebody else.")
+# Make player performance plots
+make_plots(player, data, season)
 
 # Generate predictions for the dataset
-@st.cache(allow_output_mutation=True)
-def get_predictions(model, data):
+# Use experimental memo to cache the predictions for 10 minutes
+@st.experimental_memo(persist='disk', show_spinner=True, ttl = 600)
+def get_predictions(_model, data):
     preds = model.predict(data)
     return np.exp(preds) - 10
 
 
 # Calculate the predictions for all week 12 players
-data['Prediction'] = get_predictions(model, data)
+temp = pd.DataFrame(get_predictions(model, data))
+data['Prediction'] = temp.values
 
 # If the player is playing, get their predicted output
 try:
@@ -203,6 +158,10 @@ except:
     predicted_output = 'Bye Week'
 
 # Format the output for the player
+with st.spinner('Crunching numbers, delivering you to victory.....'):
+    time.sleep(3)
+st.success('Predictions calculated. Enjoy thrashing your buddies!')
+
 col1, col2 = st.columns(2)
 col1.metric('Player', player)
 col2.metric('Predicted Points', predicted_output)
