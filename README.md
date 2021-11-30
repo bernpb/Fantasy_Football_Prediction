@@ -35,10 +35,11 @@ To tackle this challenge, I sourced the bulk of my data from the [SportsData.io]
 As with many sports datasets, this data was heavily right skewed.  Most active players had values at or close to 0 for most stat lines, while top performers (the ones we are focused on in fantasy)
 tend to have more extreme values.  As such, a customized log transformation was applied in certain models which resulted in better overall accuracy.  This transformation involved adding a constant to continuous variables to ensure that they were positive and non-zero.  
 
-Most of the features that were engineered relied on past player performance data in order to make predictions about the future.  In most cases, this data was transformed into a set of trailing averages, tracking the player's performance over the last 3 or 7 games.  Using this data, players were also binned into tiers as shown in the graphic below.  Categorical features such as past injury status and opposing team strength were also used in modeling.   
+Most of the features that were engineered relied on past player performance data in order to make predictions about the future.  In most cases, this data was transformed into a set of trailing averages, tracking the player's performance over the last 3 or 7 games. Categorical features such as past injury status and opposing team strength were also used in modeling. The effectiveness of the trailing average method for separating players is demonstrated in the graphic below.
 
-# FIGURE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+![](Docs/Tiers.png 'Fantasy Performace by Player Tier')
 
+In fantasy football, it is common practice to refer to players by their tier level at a given position.  For example, a running back who is expected to average around 18 points in a given week is considered an RB1.  If a player is expected to get 15 points, we refer to them as an RB2 and so on. 
 
 As a regression problem the models I employed to tackle the problem were simple linear regression, random forest, SVR, gradient-boosted trees as well as a deep neural network.  As this project is an academic pursuit, I spent some time with each of these techniques to better understand their intricacies.  The model with the best performance was a support vector machines regressor using an RBF kernel. The model was able to predict on my test set with an R2 score of 0.494 and a mean squared error of 28.89.
 <br><br>
@@ -54,4 +55,4 @@ One of the features that I would like to implement in the future would be to int
     * Similar to the injury status, I would like to use twitter to get public sentiment about a player going into a game.  My theory here is that roster changes, favorable matchups, etc. can correlate with fantasy performance and would be reflected around the discussion of a player online.
 * Acquisition of More Data
     * Getting my hands on more seasons of data as well as more robust statistics (snap count, red zone performance, etc) would likely help to improve my model performance significantly.
-    * It would also allow me to model each position with it's own model, which could greatly improve the accuracy of my model going forwards.  
+    * It would also give me sufficient data to model each position separately, which could greatly improve the accuracy of my model going forwards.  
