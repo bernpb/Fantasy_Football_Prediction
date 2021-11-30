@@ -10,9 +10,14 @@ from Project_Functions import trailing_stats_single_column, trailing_stats_mean,
 from Project_Functions import get_tiers, get_touchdowns, get_yards, tier_maker, LogShift, DenseTransformer
 from Make_Plots import make_plots
 
-
+st.set_page_config(
+   page_title="Fantasy Football Predictions",
+   page_icon="",
+   layout="wide",
+   initial_sidebar_state="expanded",
+)
 # Define some variables
-week = 12
+week = 13
 season = 2021
 im = Image.open('Docs/ameer-basheer-Yzef5dRpwWg-unsplash.jpg')
 im2 = Image.open('Docs/ben-hershey-B4XZxcZcTsI-unsplash.jpg')
@@ -21,7 +26,6 @@ im2 = Image.open('Docs/ben-hershey-B4XZxcZcTsI-unsplash.jpg')
 # st.set_page_config(layout='wide')
 
 # Build out the sidebar
-
 st.sidebar.image(im)
 st.sidebar.write('')
 st.sidebar.write('This page is the result of my final project for the Lighthouse Labs data science \
@@ -54,8 +58,7 @@ description = f'This is a machine learning model designed to predict the offensi
         - Kicker (K) <br>'
 st.markdown(description, unsafe_allow_html=True)
 st.markdown('***********')
-st.write("To start, enter the name of the player you are looking for projections \
-            for in the box below.  (Case and spelling matter) ")
+st.write("To start, enter the name of the player you are looking for projections for in the box below.  (Case and spelling matter) ")
 
 # Prompt for player input            
 player = st.text_input('Player Name', 'Tom Brady')
@@ -133,7 +136,9 @@ df_players = pd.read_csv('Data/weekly_data.csv')
 df_schedule = pd.read_csv('Data/game_scores.csv')
 
 # Generate data
-data = generate_data(df_players, df_schedule, week, season)
+with st.spinner('Loading data.....'):
+    data = generate_data(df_players, df_schedule, week, season)
+st.success('Data loaded successfully.')
 
 # Make player performance plots
 make_plots(player, data, season)
@@ -160,7 +165,7 @@ except:
 # Format the output for the player
 with st.spinner('Crunching numbers, delivering you to victory.....'):
     time.sleep(3)
-st.success('Predictions calculated. Enjoy thrashing your buddies!')
+st.success('Predictions calculated. Victory assured!')
 
 col1, col2 = st.columns(2)
 col1.metric('Player', player)

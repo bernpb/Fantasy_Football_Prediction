@@ -117,5 +117,8 @@
 * Work on presentation started
 * Updated visualization candidates for presentation
 
+# Day 12
+### Tuesday, November 30th, 2021
+
 
 
