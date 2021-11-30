@@ -111,7 +111,6 @@
 ### Monday, November 29th, 2021
 
 * Code review and refactoring
-* Updated project readme and created a table of contents for github
 * Updated streamlit app using st.cache to improve app performance
 * Added visualizations to app output
 * Work on presentation started
@@ -120,5 +119,8 @@
 # Day 12
 ### Tuesday, November 30th, 2021
 
-
+* Visualizations for presentation
+* Final deployment of model
+* Updated project readme and created a table of contents for github
+* Presentation
 
