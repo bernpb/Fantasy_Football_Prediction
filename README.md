@@ -56,3 +56,5 @@ One of the features that I would like to implement in the future would be to int
 * Acquisition of More Data
     * Getting my hands on more seasons of data as well as more robust statistics (snap count, red zone performance, etc) would likely help to improve my model performance significantly.
     * It would also give me sufficient data to model each position separately, which could greatly improve the accuracy of my model going forwards.  
+* Improve defensive strength feature
+    * Rather than quanitfying an opponents defensive strength based on a single season against all positions.  I would like to implement a system that quantifies that strength on a per-position basis.

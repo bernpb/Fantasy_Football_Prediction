@@ -6,14 +6,14 @@ import time
 from PIL import Image
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from Project_Functions import trailing_stats_single_column, trailing_stats_mean, get_contribution
+from Project_Functions import trailing_stats_single_column, trailing_stats_mean, get_contribution, apply_defensive_strength
 from Project_Functions import get_tiers, get_touchdowns, get_yards, tier_maker, LogShift, DenseTransformer
 from Make_Plots import make_plots
 
 st.set_page_config(
    page_title="Fantasy Football Predictions",
    page_icon="",
-   layout="wide",
+#    layout="wide",
    initial_sidebar_state="expanded",
 )
 # Define some variables

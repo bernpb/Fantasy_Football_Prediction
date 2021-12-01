@@ -6,7 +6,7 @@ from Project_Functions import trailing_stats_single_column
 def generate_data(df_players, df_schedule, week, season):
     
     """
-    Use this function to generate a dataframe of games yet to happen to make a prediction.  
+    Use this function to generate a dataframe of player matchups for the week to be predicted.  
     
     Inputs:
         - df_players: Dataframe of player statistics from previous weeks.

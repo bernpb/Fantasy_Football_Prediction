@@ -285,3 +285,28 @@ class DenseTransformer(TransformerMixin):
 
     def transform(self, X, y = None, **fit_params):
         return X.todense()
+    
+    
+#---------------------------------------------------------------------
+
+    
+def apply_defensive_strength(data):
+    '''
+    Apply the defensive strength of the opposing team to the dataframe.
+    '''
+    # Import the defensive ranking csv
+    def_rank = pd.read_csv('Data/defensive_ranking.csv')
+    # Make merge strings to merge the two dataframes
+    def_rank['MergeString'] = def_rank['Team'].astype(str) + def_rank['Season'].astype(str) 
+    # Drop duplicate columns
+    def_rank.drop(columns = ['Team', 'Season'],
+                 inplace = True)
+    # Make the merge string on the target dataframe
+    data['MergeString'] = data['Team'].astype(str) + data['Season'].astype(str)
+
+    # Merge
+    data = data.merge(def_rank,
+                     how = 'left',
+                     left_on = 'MergeString',
+                     right_on = 'MergeString')
+    return data
