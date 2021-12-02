@@ -3,7 +3,7 @@
 ## Introduction
 This project constitutes the final assignment of the Lighthouse Labs data science bootcamp.
 
-The goal of this project is was to predict the offensive output of NFL players with respect to the fantasy points they produce in a PPR (Points Per Reception) format.  Fantasy football is an industry valued at over $18 billion with over 60 million players in North America.  As such, there is no shortage of individuals looking to get a competitive edge on the friends, family and co-workers they participate with.
+The goal of this project was to predict the offensive output of NFL players with respect to the fantasy points they produce in a PPR (Points Per Reception) format.  Fantasy football is an industry valued at over $18 billion with over 60 million players in North America.  As such, there is no shortage of individuals looking to get a competitive edge on the friends, family and co-workers they participate with.
 <br><br>
 
 ## Table of Contents
