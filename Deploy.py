@@ -22,8 +22,9 @@ season = 2021
 im = Image.open('Docs/ameer-basheer-Yzef5dRpwWg-unsplash.jpg')
 im2 = Image.open('Docs/ben-hershey-B4XZxcZcTsI-unsplash.jpg')
 
-# Set the default width of the app
-# st.set_page_config(layout='wide')
+# Import the datasets used to generate player data for future games
+df_players = pd.read_csv('Data/weekly_data.csv')
+df_schedule = pd.read_csv('Data/game_scores.csv')
 
 # Build out the sidebar
 st.sidebar.image(im)
@@ -61,7 +62,8 @@ st.markdown('***********')
 st.write("To start, enter the name of the player you are looking for projections for in the box below.  (Case and spelling matter) ")
 
 # Prompt for player input            
-player = st.text_input('Player Name', 'Tom Brady')
+player = st.selectbox(label = 'Player Name', options = df_players[df_players['Season'] == 2021]['Name'],
+index = 8)
 
 @st.cache(allow_output_mutation=True)
 def generate_data(df_players, df_schedule, week, season):
@@ -131,14 +133,12 @@ model = pickle.load(open('Pickles/SVR_Final.pickle', 'rb'))
 
 
 
-# Import the datasets used to generate player data for future games
-df_players = pd.read_csv('Data/weekly_data.csv')
-df_schedule = pd.read_csv('Data/game_scores.csv')
+
 
 # Generate data
-with st.spinner('Loading data.....'):
-    data = generate_data(df_players, df_schedule, week, season)
-st.success('Data loaded successfully.')
+
+data = generate_data(df_players, df_schedule, week, season)
+
 
 # Make player performance plots
 make_plots(player, data, season)

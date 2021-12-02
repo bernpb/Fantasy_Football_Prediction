@@ -124,3 +124,10 @@
 * Updated project readme and created a table of contents for github
 * Presentation
 
+# Day 13
+### Wednesday, December 1st, 2021
+
+* Tweaks to presentation
+* Presentation run-throughs
+* Got the defensive strength feature working
+* Notebook cleanup
