@@ -62,7 +62,7 @@ st.markdown('***********')
 st.write("To start, enter the name of the player you are looking for projections for in the box below.  (Case and spelling matter) ")
 
 # Prompt for player input            
-player = st.selectbox(label = 'Player Name', options = df_players[df_players['Season'] == 2021]['Name'],
+player = st.selectbox(label = 'Player Name', options = df_players[df_players['Season'] == 2021]['Name'].unique(),
 index = 8)
 
 @st.cache(allow_output_mutation=True)
