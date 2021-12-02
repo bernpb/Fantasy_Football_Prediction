@@ -53,8 +53,12 @@ One of the features that I would like to implement in the future would be to int
     * As of right now, I don't have a method of detecting whether a given player is likely to start the game or not.  As such, I would like to use Twitter's API to get tweets and determine the probability that a player's injury will prevent them from playing in a given game.  
 * Sentiment Analysis as a feature
     * Similar to the injury status, I would like to use twitter to get public sentiment about a player going into a game.  My theory here is that roster changes, favorable matchups, etc. can correlate with fantasy performance and would be reflected around the discussion of a player online.
+
+Other next steps are more focused on working with the data that I already have, or getting more of it.
+
 * Acquisition of More Data
     * Getting my hands on more seasons of data as well as more robust statistics (snap count, red zone performance, etc) would likely help to improve my model performance significantly.
     * It would also give me sufficient data to model each position separately, which could greatly improve the accuracy of my model going forwards.  
+    * Could be cost-prohibitive depending on what I would like to add
 * Improve defensive strength feature
     * Rather than quanitfying an opponents defensive strength based on a single season against all positions.  I would like to implement a system that quantifies that strength on a per-position basis.
