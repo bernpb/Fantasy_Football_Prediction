@@ -17,7 +17,7 @@ st.set_page_config(
    initial_sidebar_state="expanded",
 )
 # Define some variables
-week = 13
+week = 15
 season = 2021
 im = Image.open('Docs/ameer-basheer-Yzef5dRpwWg-unsplash.jpg')
 im2 = Image.open('Docs/ben-hershey-B4XZxcZcTsI-unsplash.jpg')
