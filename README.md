@@ -44,7 +44,7 @@ In fantasy football, it is common practice to refer to players by their tier lev
 As a regression problem the models I employed to tackle the problem were simple linear regression, random forest, SVR, gradient-boosted trees as well as a deep neural network.  As this project is an academic pursuit, I spent some time with each of these techniques to better understand their intricacies.  The model with the best performance was a support vector machines regressor using an RBF kernel. The model was able to predict on my test set with an R2 score of 0.494 and a mean squared error of 28.89.
 <br><br>
 ## Deployment
-The model has been deployed using an Amazon EC2 instance with the streamlit library providing the interactive front end.  A link to the web application can be found [here](http://13.58.187.7:8501/).  Using the app, a user can input the name of any active ball-carrier in the NFL and get a prediction of how many fantasy points that player can be expected to accumulate for the given week of the season. 
+The model has been deployed using an Amazon EC2 instance with the streamlit library providing the interactive front end.  A link to the web application can be found [here](http://18.188.210.223:8501).  Using the app, a user can input the name of any active ball-carrier in the NFL and get a prediction of how many fantasy points that player can be expected to accumulate for the given week of the season. 
 <br><br>
 ## Future Work
 One of the features that I would like to implement in the future would be to integrate natural language processing into my model.  This application would be two fold:
